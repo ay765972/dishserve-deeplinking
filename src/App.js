@@ -24,7 +24,7 @@ function App() {
   };
   return (
     <div className="App">
-      {/* {renderSeoTags()} */}
+      {renderSeoTags()}
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
