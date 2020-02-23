@@ -1,35 +1,113 @@
 {
-  "name": "linking",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.1",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-helmet": "^5.2.1",
-    "react-scripts": "3.4.0"
-  },
+  "name": "reactboilerplat",
+  "version": "1.0.0",
+  "description": "A simple react boilerplate including react redux and ssr and webpack ",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "webpack-dev-server --mode development --config webpack/webpack.dev.js --open --history-api-fallback --host 0.0.0.0",
+    "build": "NODE_ENV=production webpack --mode production --config webpack/webpack.prod.js --display-used-exports",
+    "start:dev-server": "pm2 start ecosystem.config.js",
+    "test": "echo test",
+    "lint:staged": "lint-staged",
+    "server": "babel-node app.js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+  "precommit": "lint-staged",
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "prettier --parser flow --write",
+      "git add"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaku14n/reactboilerplat.git"
+  },
+  "keywords": [
+    "React",
+    "Boilerplate"
+  ],
+  "author": "aakarsh yadav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaku14n/reactboilerplat/issues"
+  },
+  "homepage": "https://github.com/aaku14n/reactboilerplat#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^2.1.0",
+    "eslint": "^5.13.0",
+    "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "preload-webpack-plugin": "^3.0.0-beta.3",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.3",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@researchgate/react-intersection-list": "^1.0.2",
+    "@researchgate/react-intersection-observer": "^0.6.1",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-css-modules-transform": "^1.6.2",
+    "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "clean-webpack-plugin": "^1.0.1",
+    "compression-webpack-plugin": "^2.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eventsource-polyfill": "^0.9.6",
+    "exports-loader": "^0.7.0",
+    "express": "^4.16.4",
+    "express-basic-auth": "^1.2.0",
+    "helmet": "^3.21.2",
+    "html-webpack-harddisk-plugin": "^1.0.1",
+    "husky": "^1.3.1",
+    "intersection-observer": "0.5.0",
+    "js-sha256": "^0.9.0",
+    "lint-staged": "^8.1.3",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.range": "^3.2.0",
+    "lodash.throttle": "^4.1.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-fetch-polyfill": "^2.0.6",
+    "phone": "^2.3.19",
+    "prettier-eslint": "^8.8.2",
+    "query-string": "^6.5.0",
+    "rc-slider": "^8.6.9",
+    "react-helmet": "^6.0.0-beta",
+    "react-intl": "^2.8.0",
+    "react-loadable": "5.3.1",
+    "react-loadable-ssr-addon": "^0.1.6",
+    "react-responsive": "6.1.1",
+    "react-router-config": "^4.4.0-beta.6",
+    "react-select": "^2.4.2",
+    "react-swipeable": "5.1.0",
+    "redux-thunk": "^2.3.0",
+    "simple-card-validator": "^1.1.0",
+    "sw-precache-webpack-plugin": "^0.11.5",
+    "uuid": "^3.3.2",
+    "webpack-bundle-analyzer": "^3.5.1",
+    "webpack-cli": "^3.2.3",
+    "webpack-flush-chunks": "^2.0.3",
+    "whatwg-fetch": "^3.0.0"
   }
 }

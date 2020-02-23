@@ -206,88 +206,7 @@
     <div id="service-worker-toast-root"></div>
     <div class="connection-status">You are currently Offline</div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <% if(htmlWebpackPlugin.options.STAGE === "production") { %>
-    <noscript>
-      <iframe
-        src="//www.googletagmanager.com/ns.html?id=GTM-MMJQ5H"
-        height="0"
-        width="0"
-        style="display:none;visibility:hidden"
-      ></iframe>
-    </noscript>
-    <script>
-      (function(w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          "gtm.start": new Date().getTime(),
-          event: "gtm.js"
-        });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "//www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-MMJQ5H");
-
-      (function(a, s, y, n, c, h, i, d, e) {
-        s.className += " " + y;
-        h.start = 1 * new Date();
-        h.end = i = function() {
-          s.className = s.className.replace(RegExp(" ?" + y), "");
-        };
-        (a[n] = a[n] || []).hide = h;
-        setTimeout(function() {
-          i();
-          h.end = null;
-        }, c);
-        h.timeout = c;
-      })(window, document.documentElement, "async-hide", "dataLayer", 4000, {
-        "GTM-MJNGB25": true
-      });
-
-      (function(i, s, o, g, r, a, m) {
-        i["GoogleAnalyticsObject"] = r;
-        (i[r] =
-          i[r] ||
-          function() {
-            (i[r].q = i[r].q || []).push(arguments);
-          }),
-          (i[r].l = 1 * new Date());
-        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m);
-      })(
-        window,
-        document,
-        "script",
-        "https://www.google-analytics.com/analytics.js",
-        "ga"
-      );
-
-      ga("create", "UA-25430403-1", "auto"); // Update tracker settings
-      ga("require", "GTM-MJNGB25");
-      // BE-380 override GA sendHitTask
-      var identifiersMapper = [];
-      identifiersMapper.push({
-        name: "gaUserId",
-        value: "UA-25430403-1"
-      });
-      ga(function() {
-        var tracker = ga.getByName("t0");
-        var originalSendHitTask = tracker.get("sendHitTask");
-        tracker.set("sendHitTask", function(model) {
-          originalSendHitTask(model);
-          var payLoad = model.get("hitPayload");
-          //console.log("model=" + JSON.stringify(model));
-          setTimeout(function() {
-            google_ubx.sendEventFromPayload(payLoad, identifiersMapper);
-          }, 2000);
-        });
-      });
-    </script>
-    <% } else { %>
+    
     <!-- Google Tag Manager -->
     <noscript>
       <iframe
@@ -369,72 +288,7 @@
         });
       });
     </script>
-    <% } %> <% if(htmlWebpackPlugin.options.STAGE === "production") { %>
-    <script>
-      setTimeout(function() {
-        !(function(f, b, e, v, n, t, s) {
-          if (f.fbq) return;
-          n = f.fbq = function() {
-            n.callMethod
-              ? n.callMethod.apply(n, arguments)
-              : n.queue.push(arguments);
-          };
-          if (!f._fbq) f._fbq = n;
-          n.push = n;
-          n.loaded = !0;
-          n.version = "2.0";
-          n.queue = [];
-          t = b.createElement(e);
-          t.async = !0;
-          t.src = v;
-          s = b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t, s);
-        })(
-          window,
-          document,
-          "script",
-          "//connect.facebook.net/en_US/fbevents.js"
-        );
-        let match =
-          document.cookie.match &&
-          document.cookie.match(new RegExp("userDetails" + `=([^;]+)`));
-        let address =
-          document.cookie.match &&
-          document.cookie.match(new RegExp("userAddressDetails" + `=([^;]+)`));
-        let phone =
-          document.cookie.match &&
-          document.cookie.match(new RegExp("userPhoneDetails" + `=([^;]+)`));
-        const phoneValue =
-          JSON.parse(phone && phone[1]) && JSON.parse(phone && phone[1]);
-        const addressValue =
-          JSON.parse(address && address[1]) &&
-          JSON.parse(address && address[1]);
-        const cookieValue =
-          JSON.parse(match && match[1]) &&
-          JSON.parse(match && match[1]).information;
-        fbq("init", 540535596054575, {
-          em: cookieValue && cookieValue.email,
-          ph: phoneValue && phoneValue.phone ? phoneValue.phone : "",
-          fn:
-            cookieValue && cookieValue.first_name ? cookieValue.first_name : "",
-          ln: cookieValue && cookieValue.last_name ? cookieValue.last_name : "",
-          ge: cookieValue && cookieValue.gender,
-          ct: addressValue && addressValue.city ? addressValue.city : "",
-          st: addressValue && addressValue.state ? addressValue.state : "",
-          zp: addressValue && addressValue.zip ? addressValue.zip : ""
-        });
-        fbq("track", "PageView");
-      }, 10000);
-    </script>
-    <noscript>
-      <img
-        height="1"
-        width="1"
-        style="display:none"
-        src="https://www.facebook.com/tr?id=540535596054575&ev=PageView&noscript=1"
-      />
-    </noscript>
-    <% } else { %>
+     
     <script>
       setTimeout(function() {
         !(function(f, b, e, v, n, t, s) {
@@ -501,7 +355,7 @@
         src="https://www.facebook.com/tr?id=984929324919826&ev=PageView&noscript=1"
       />
     </noscript>
-    <% } %>
+    
 
     <!-- <script>
       setTimeout(function() {
@@ -516,15 +370,11 @@
       }, 10000);
     </script> 
 
-    <% if(htmlWebpackPlugin.options.STAGE === "production") {%>
-    <script>
-      const branchKey = "key_live_bhBqV2wEKTazoZDNtvQk8jhbsyjz5Fu4";
-    </script>
-    <% } else { %>
+    
     <script>
       const branchKey = "key_test_ajzvO4tyUGmEoWuHBvU2Rfkcwuoy1vVa";
     </script>
-    <% } %>
+    
     <script>
       setTimeout(function() {
         (function(b, r, a, n, c, h, _, s, d, k) {
@@ -601,5 +451,5 @@
         localStorage.setItem("swUpdate", "updated");
       }
     </script>
-  </body>
+  <script type="text/javascript" src="/npm.react-router-dom.chunk.js"></script><script type="text/javascript" src="/npm.react-router.chunk.js"></script><script type="text/javascript" src="/npm.history.chunk.js"></script><script type="text/javascript" src="/npm.scheduler.chunk.js"></script><script type="text/javascript" src="/npm.prop-types.chunk.js"></script><script type="text/javascript" src="/npm.html-entities.chunk.js"></script><script type="text/javascript" src="/npm.react-dom.chunk.js"></script><script type="text/javascript" src="/npm.react.chunk.js"></script><script type="text/javascript" src="/npm.webpack-dev-server.chunk.js"></script><script type="text/javascript" src="/npm.eventsource-polyfill.chunk.js"></script><script type="text/javascript" src="/npm.url.chunk.js"></script><script type="text/javascript" src="/npm.events.chunk.js"></script><script type="text/javascript" src="/npm.whatwg-fetch.chunk.js"></script><script type="text/javascript" src="/npm.node-libs-browser.chunk.js"></script><script type="text/javascript" src="/npm.path-to-regexp.chunk.js"></script><script type="text/javascript" src="/npm.react-helmet.chunk.js"></script><script type="text/javascript" src="/npm.sockjs-client.chunk.js"></script><script type="text/javascript" src="/bundle.js"></script></body>
 </html>
