@@ -16,9 +16,9 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Router history={browserHistory}>
+        <Switch>
           <Route exact path="/" component={HomeComponent} />
-        </Router>
+        </Switch>
       </React.Fragment>
     );
   }

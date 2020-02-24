@@ -147,10 +147,7 @@ server.get("*", async (req, res) => {
       return res.status(404).end();
     }
 
-    const actionsTemp = matchRoutes(
-      Routes,
-      req.path.replace(localBaseUrlForInternalRouting, "/")
-    ).map(({ route }) => {
+    const actionsTemp = matchRoutes(Routes, req).map(({ route }) => {
       return !route.component.preload
         ? route.component
         : isBot
@@ -164,8 +161,8 @@ server.get("*", async (req, res) => {
       .map(component => {
         return isBot && component.fetching
           ? component.fetching({
-              ...storeObj,
-              path: req.path.replace(localBaseUrlForInternalRouting, "/")
+              ...{},
+              path: req.path
             })
           : null;
       })
@@ -182,7 +179,7 @@ server.get("*", async (req, res) => {
     const modules = new Set();
     const html = renderToString(
       <Loadable.Capture report={moduleName => modules.add(moduleName)}>
-        <StaticRouter location={req.url} context={{}} basename={BASE_URL}>
+        <StaticRouter location={req.url} context={{}}>
           <App />
         </StaticRouter>
       </Loadable.Capture>

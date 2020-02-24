@@ -16,18 +16,18 @@
     "0": {
       "js": [
         {
-          "file": "main-bundle.7f2a663d1e80aa9d7d42.js",
-          "hash": "fb7788ff70dcb98524f4",
-          "publicPath": "main-bundle.7f2a663d1e80aa9d7d42.js"
+          "file": "main-bundle.3b362158192ef564d826.js",
+          "hash": "2498645ecdb7ba89fe84",
+          "publicPath": "http://localhost:3000/main-bundle.3b362158192ef564d826.js"
         }
       ]
     },
     "1": {
       "js": [
         {
-          "file": "1.7f2a663d1e80aa9d7d42.chunk.js",
-          "hash": "9510e482f7512bf10c73",
-          "publicPath": "1.7f2a663d1e80aa9d7d42.chunk.js"
+          "file": "1.3b362158192ef564d826.chunk.js",
+          "hash": "d1fb6a71c651a9ef8c08",
+          "publicPath": "http://localhost:3000/1.3b362158192ef564d826.chunk.js"
         }
       ]
     }
