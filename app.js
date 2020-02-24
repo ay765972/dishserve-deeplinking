@@ -8,7 +8,7 @@ import { StaticRouter } from "react-router-dom";
 
 import Loadable from "react-loadable";
 import { getBundles } from "react-loadable-ssr-addon";
-import AppContainer from "./src/AppContainer";
+import App from "./src/App";
 import store from "./src/configureStore";
 
 import fs from "fs";
@@ -197,7 +197,7 @@ server.get("*", async (req, res) => {
       <Loadable.Capture report={moduleName => modules.add(moduleName)}>
         <Provider store={isBot ? storeObj : emptyCloneStore}>
           <StaticRouter location={req.url} context={{}} basename={BASE_URL}>
-            <AppContainer />
+            <App />
           </StaticRouter>
         </Provider>
       </Loadable.Capture>
