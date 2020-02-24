@@ -14,11 +14,6 @@ import fs from "fs";
 import { Helmet } from "react-helmet";
 import { matchRoutes } from "react-router-config";
 import Routes from "./src/Route";
-import cloneDeep from "lodash.clonedeep";
-import { SPP_ROUTE } from "./src/Utils/RouteUrl";
-import { isArabicLanguageUrl } from "./src/Utils/UserAgent";
-
-import { GET_BASE_URL_REG_EX } from "./src/Utils/RouteUrl";
 
 const BASE_PATH = process.env.BASE_PATH;
 
@@ -145,13 +140,8 @@ server.get("*", async (req, res) => {
   };
   const filePath = path.resolve(__dirname, "dist/index.html");
   fs.readFile(filePath, "utf8", async (err, htmlData) => {
-    let localBaseUrlForInternalRouting = req.url.match(GET_BASE_URL_REG_EX)[0];
-    let BASE_URL = localBaseUrlForInternalRouting;
-    if (localBaseUrlForInternalRouting !== "/") {
-      BASE_URL = localBaseUrlForInternalRouting.replace(/\/$/, "");
-    } else {
-      BASE_URL = "";
-    }
+    let BASE_URL = "/";
+
     if (err) {
       console.error("err", err);
       return res.status(404).end();
@@ -236,12 +226,7 @@ server.get("*", async (req, res) => {
                 .join("\n")
             : `<style>${css.join("")}</style>`
         )
-        .replace(
-          `<html>`,
-          isArabicLanguageUrl()
-            ? `<html lang="ar" dir="rtl">`
-            : `<html lang="en" dir="ltr">`
-        )
+
         .replace('<div id="root"></div>', `<div id="root">${html}</div>`)
         .replace(
           "</head>",
