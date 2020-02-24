@@ -9,7 +9,6 @@ import { StaticRouter } from "react-router-dom";
 import Loadable from "react-loadable";
 import { getBundles } from "react-loadable-ssr-addon";
 import App from "./src/App";
-import store from "./src/configureStore";
 
 import fs from "fs";
 import { Helmet } from "react-helmet";
@@ -18,7 +17,7 @@ import Routes from "./src/Route";
 import cloneDeep from "lodash.clonedeep";
 import { SPP_ROUTE } from "./src/Utils/RouteUrl";
 import { isArabicLanguageUrl } from "./src/Utils/UserAgent";
-import emptyCloneStore from "./src/SsrConfigureStore";
+
 import { GET_BASE_URL_REG_EX } from "./src/Utils/RouteUrl";
 
 const BASE_PATH = process.env.BASE_PATH;
@@ -120,14 +119,12 @@ server.get("*", async (req, res) => {
     userAgent: req.headers["user-agent"]
   };
   const countryCode = req.headers["cf-ipcountry"];
-  let storeObj;
+
   const userAgent = req.headers["user-agent"];
 
   const isBot = true;
 
   var isChrome = /Chrome/.test(userAgent);
-
-  storeObj = cloneDeep(store);
 
   // }
   //  need to fix this later
@@ -195,11 +192,9 @@ server.get("*", async (req, res) => {
     const modules = new Set();
     const html = renderToString(
       <Loadable.Capture report={moduleName => modules.add(moduleName)}>
-        <Provider store={isBot ? storeObj : emptyCloneStore}>
-          <StaticRouter location={req.url} context={{}} basename={BASE_URL}>
-            <App />
-          </StaticRouter>
-        </Provider>
+        <StaticRouter location={req.url} context={{}} basename={BASE_URL}>
+          <App />
+        </StaticRouter>
       </Loadable.Capture>
     );
 
@@ -256,13 +251,7 @@ server.get("*", async (req, res) => {
                 script.file
               }"  ></script>`;
             })
-            .join("\n") +
-            `<script>window.INITIAL_STATE = ${
-              isBot ? JSON.stringify(storeObj.getState()) : ""
-            }
-            window.countryCode = ${JSON.stringify(countryCode)}
-          </script>` +
-            "</head>"
+            .join("\n") + "</head>"
         )
         .replace(
           "<title>TLC</title>",
