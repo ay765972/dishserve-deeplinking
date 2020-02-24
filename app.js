@@ -123,9 +123,7 @@ server.get("*", async (req, res) => {
   let storeObj;
   const userAgent = req.headers["user-agent"];
 
-  const isBot = /bot|googlebot|google|crawler|spider|robot|crawling/i.test(
-    userAgent
-  );
+  const isBot = true;
 
   var isChrome = /Chrome/.test(userAgent);
 
